@@ -77,17 +77,25 @@ print_info "Updating formula file..."
 
 sed -i.tmp "s/version \".*\"/version \"$VERSION\"/" "$FORMULA_FILE"
 
-sed -i.tmp "s|url \"$REPO_URL/releases/download/v.*/tacotruck-.*-darwin-x64\"|url \"$DARWIN_X64_URL\"|" "$FORMULA_FILE"
-sed -i.tmp "|url \"$DARWIN_X64_URL\"|,|sha256| s|sha256 \".*\"|sha256 \"$DARWIN_X64_SHA256\"|" "$FORMULA_FILE"
+update_platform() {
+    local platform="$1"
+    local url="$2" 
+    local sha256="$3"
+    
+    sed -i.tmp "s#url \"$REPO_URL/releases/download/v.*/tacotruck-.*-$platform\"#url \"$url\"#" "$FORMULA_FILE"
+    
+    awk -v url="$url" -v sha="$sha256" '
+        /url.*/ && $0 ~ url { found=1; print; next }
+        found && /sha256/ { gsub(/"[^"]*"/, "\"" sha "\""); found=0 }
+        { print }
+    ' "$FORMULA_FILE" > "$FORMULA_FILE.new" && mv "$FORMULA_FILE.new" "$FORMULA_FILE"
+}
 
-sed -i.tmp "s|url \"$REPO_URL/releases/download/v.*/tacotruck-.*-darwin-arm64\"|url \"$DARWIN_ARM64_URL\"|" "$FORMULA_FILE"
-sed -i.tmp "|url \"$DARWIN_ARM64_URL\"|,|sha256| s|sha256 \".*\"|sha256 \"$DARWIN_ARM64_SHA256\"|" "$FORMULA_FILE"
-
-sed -i.tmp "s|url \"$REPO_URL/releases/download/v.*/tacotruck-.*-linux-x64\"|url \"$LINUX_X64_URL\"|" "$FORMULA_FILE"
-sed -i.tmp "|url \"$LINUX_X64_URL\"|,|sha256| s|sha256 \".*\"|sha256 \"$LINUX_X64_SHA256\"|" "$FORMULA_FILE"
-
-sed -i.tmp "s|url \"$REPO_URL/releases/download/v.*/tacotruck-.*-linux-arm64\"|url \"$LINUX_ARM64_URL\"|" "$FORMULA_FILE"
-sed -i.tmp "|url \"$LINUX_ARM64_URL\"|,|sha256| s|sha256 \".*\"|sha256 \"$LINUX_ARM64_SHA256\"|" "$FORMULA_FILE"
+# Update all platforms
+update_platform "darwin-x64" "$DARWIN_X64_URL" "$DARWIN_X64_SHA256"
+update_platform "darwin-arm64" "$DARWIN_ARM64_URL" "$DARWIN_ARM64_SHA256"  
+update_platform "linux-x64" "$LINUX_X64_URL" "$LINUX_X64_SHA256"
+update_platform "linux-arm64" "$LINUX_ARM64_URL" "$LINUX_ARM64_SHA256"
 
 rm -f "$FORMULA_FILE.tmp"
 
