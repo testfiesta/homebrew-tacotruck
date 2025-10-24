@@ -41,14 +41,14 @@ get_sha256() {
     local url="$1"
     local temp_file=$(mktemp)
     
-    print_info "Downloading $url"
+    print_info "Downloading $url" >&2
     if curl -L -f -s -o "$temp_file" "$url"; then
         local sha256=$(shasum -a 256 "$temp_file" | cut -d' ' -f1)
         rm "$temp_file"
         echo "$sha256"
     else
         rm -f "$temp_file"
-        print_error "Failed to download $url"
+        print_error "Failed to download $url" >&2
         return 1
     fi
 }
