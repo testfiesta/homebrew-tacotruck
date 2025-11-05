@@ -1,30 +1,30 @@
 class Tacotruck < Formula
   desc "Test/QA data pipeline by TestFiesta"
   homepage "https://github.com/testfiesta/tacotruck"
-  version "1.0.0-beta.31"
+  version "1.0.0-beta.32"
   license "MIT"
 
   on_macos do
     on_intel do
-      url "https://github.com/testfiesta/tacotruck/releases/download/v1.0.0-beta.31/tacotruck-1.0.0-beta.31-darwin-x64"
-      sha256 "98460160d8e2290321b1d82ff41ad0ddc4398283beb9c9e271a3eac00f0fff17"
+      url "https://github.com/testfiesta/tacotruck/releases/download/v1.0.0-beta.32/tacotruck-1.0.0-beta.32-darwin-x64"
+      sha256 "df6330941e0b0be5313b9dcb083f7fbb6afcc0adf07b71ecadf473ad995a5e01"
     end
 
     on_arm do
-      url "https://github.com/testfiesta/tacotruck/releases/download/v1.0.0-beta.31/tacotruck-1.0.0-beta.31-darwin-arm64"
-      sha256 "11e47015eef0fc964ed0f54e5af84da205114b92d61318d8765c7f2f71dfc8b6"
+      url "https://github.com/testfiesta/tacotruck/releases/download/v1.0.0-beta.32/tacotruck-1.0.0-beta.32-darwin-arm64"
+      sha256 "7a14dd79b49143f86c79b7ac1bf546f582e9f6b6304d32c6dacb629d97effb79"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/testfiesta/tacotruck/releases/download/v1.0.0-beta.31/tacotruck-1.0.0-beta.31-linux-x64"
-      sha256 "82814a7409d06c9fb5d78ffa183ee6e8ae5df605f1ffccab314bd3d99f9d53e4"
+      url "https://github.com/testfiesta/tacotruck/releases/download/v1.0.0-beta.32/tacotruck-1.0.0-beta.32-linux-x64"
+      sha256 "d12b7ebb5499ceb52e00caf85ac7909731bb186ddef380891feb304aed6f77eb"
     end
 
     on_arm do
-      url "https://github.com/testfiesta/tacotruck/releases/download/v1.0.0-beta.31/tacotruck-1.0.0-beta.31-linux-arm64"
-      sha256 "956eb2dbd22e1ddc8d36c22385dff7798e6b0ddd033d713001e46d67a2823a29"
+      url "https://github.com/testfiesta/tacotruck/releases/download/v1.0.0-beta.32/tacotruck-1.0.0-beta.32-linux-arm64"
+      sha256 "1e179e90a58fe558cb04159377231904db1329a1736dded77b056551f45ba08f"
     end
   end
 
